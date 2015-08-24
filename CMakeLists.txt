@@ -22,7 +22,7 @@ include_directories(
 
 catkin_package(
   INCLUDE_DIR
-    ${RPLIDAR_SDK_PATH}/include
+    "${RPLIDAR_SDK_PATH}/include"
   CATKIN_DEPENDS
     roscpp
     rosconsole

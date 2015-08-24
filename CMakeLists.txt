@@ -20,7 +20,15 @@ include_directories(
   ${RPLIDAR_SDK_PATH}/src
 )
 
-catkin_package()
+catkin_package(
+  INCLUDE_DIR
+    ${RPLIDAR_SDK_PATH}/include
+  CATKIN_DEPENDS
+    roscpp
+    rosconsole
+    sensor_msgs
+    std_srvs
+)
 
 add_executable(rplidarNode src/node.cpp ${RPLIDAR_SDK_SRC})
 target_link_libraries(rplidarNode ${catkin_LIBRARIES} rt)

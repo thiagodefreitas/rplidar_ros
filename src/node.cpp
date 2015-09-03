@@ -158,7 +158,7 @@ int main(int argc, char * argv[]) {
     std::string frame_id;
     bool inverted = false;
     bool angle_compensate = true;
-    ros::Rate r(10.0);
+    double loop_rate = 10.0;
 
     ros::NodeHandle nh;
     ros::Publisher scan_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1000);
@@ -167,9 +167,12 @@ int main(int argc, char * argv[]) {
     nh_private.param<int>("serial_baudrate", serial_baudrate, 115200);
     nh_private.param<std::string>("frame_id", frame_id, "laser_frame");
     nh_private.param<bool>("inverted", inverted, "false");
+    nh_private.param<double>("loop_rate", loop_rate, 10.0);
     nh_private.param<bool>("angle_compensate", angle_compensate, "true");
 
     u_result     op_result;
+
+    ros::Rate r(loop_rate);
 
     // create the driver instance
     drv = RPlidarDriver::CreateDriver(RPlidarDriver::DRIVER_TYPE_SERIALPORT);
